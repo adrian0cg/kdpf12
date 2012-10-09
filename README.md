@@ -1,4 +1,6 @@
 kdpf12
 ======
 
-KaufDa Platforms 2012 Contest
+Plat_Forms 2012 Contest - Team kaufDA
+
+CafMan - The Caffeine Manager
