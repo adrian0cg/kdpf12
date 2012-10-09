@@ -10,7 +10,7 @@ class CaffeineIntake {
     static mapWith = "mongo"
 
     /**
-     * Timestamp of consuption
+     * Timestamp of consumption
      */
     Date taken = new Date()
     /**
@@ -22,7 +22,12 @@ class CaffeineIntake {
      */
     User consumer
 
+    /**
+     * The corresponding peak height
+     */
+    Double peakLevel
+
     static constraints = {
-        dose(min: 0)
+        dose min: 0.0D
     }
 }
