@@ -21,7 +21,7 @@ environments {
             mongo {
                 host = "160.45.116.138"
                 port = 27017
-                databaseName = "cafman_dev"
+                databaseName = "cafman_dev_pj"
             }
         }
     }

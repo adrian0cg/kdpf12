@@ -96,3 +96,13 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.kaufda.plat_forms.cafman.User'
+grails.plugins.springsecurity.authority.className = 'de.kaufda.plat_forms.cafman.Role'
+
+// admin user configuration
+security.admin.defaults.username = "CafMan.manager"
+security.admin.defaults.fullName = "CafMan Manager"
+security.admin.defaults.password = "admin"
+security.admin.defaults.email = "organizers@platf-form.org"
