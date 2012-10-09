@@ -16,11 +16,21 @@ environments {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
+        mongo {
+            host = "160.45.116.138"
+            port = 27017
+            databaseName = "cafman_dev"
+        }
     }
     test {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+        }
+        mongo {
+            host = "160.45.116.138"
+            port = 27017
+            databaseName = "cafman_test"
         }
     }
     production {
@@ -38,6 +48,11 @@ environments {
                testOnReturn=true
                validationQuery="SELECT 1"
             }
+        }
+        mongo {
+            host = "160.45.116.138"
+            port = 27017
+            databaseName = "cafman_prod"
         }
     }
 }
