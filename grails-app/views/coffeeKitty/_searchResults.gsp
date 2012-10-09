@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span12">
+    <div class="span12" id="searchResults">
         <h3>Search results:</h3>
         <p>
         <table class="table">
@@ -10,6 +10,9 @@
             </tr>
             </thead>
             <tbody>
+
+            <g:each in="coffeeKitties" var="coffeeKitty">
+
             <tr class="success">
                 <td>The Addicts</td>
                 <td>Already a Member</td>
@@ -55,6 +58,9 @@
                 <td>vel dolor.</td>
                 <td>Already a Member</td>
             </tr>
+
+            </g:each>
+
             </tbody>
         </table>
 

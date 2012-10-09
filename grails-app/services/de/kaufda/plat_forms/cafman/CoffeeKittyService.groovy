@@ -8,8 +8,11 @@ package de.kaufda.plat_forms.cafman
  */
 class CoffeeKittyService {
 
+    grails.gsp.PageRenderer groovyPageRenderer
+
     def searchByName(String query) {
         List<CoffeeKitty> coffeeKitties = CoffeeKitty.collection.find( ['name':['$regex':"${query}", '$options': 'i']]).collect{it as CoffeeKitty }
         return coffeeKitties
     }
+
 }

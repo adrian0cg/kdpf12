@@ -62,10 +62,10 @@
 
         <p>
 
-        <form class="form-inline">
-            <input id="create-name" type="text" class="input-xlarge" placeholder="coffee kitty name">
+        <g:form class="form-inline" action="save">
+            <input id="create-name" type="text" class="input-xlarge" placeholder="coffee kitty name" name="name">
             <button id="create-submit" type="sbumit" class="btn">Create kitty</button>
-        </form>
+        </g:form>
     </p>
     </div>
 </div>
