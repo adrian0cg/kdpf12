@@ -57,5 +57,6 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 
         test ":build-test-data:2.0.3"
+        compile ":mongodb:1.0.0.GA"
     }
 }
