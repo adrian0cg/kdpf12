@@ -14,10 +14,10 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="dropdown active">
-                        <a id="home-link" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <g:link id="home-link" url="[controller: 'user', action: 'home']" class="dropdown-toggle" data-toggle="dropdown">
                             <g:message code="nav.home"/>
                             <b class="caret"></b>
-                        </a>
+                        </g:link>
                         <ul class="dropdown-menu">
                             <%--
                                 different variant:
@@ -31,22 +31,37 @@
                         </ul>
                     </li>
                     <sec:ifLoggedIn>
-                        <li><a id="caffeine-link" href="caffeine.html">Caffeine Statistics</a></li>
-                        <li><a id="highscores-link" href="highscore.html">Highscores</a></li>
-                        <li><a id="kitty-link" href="kitty.html">Coffee Kitty</a></li>
+                        <li>
+                            <g:link id="caffeine-link"  url="[controller: 'caffeine', action: 'statistics']">
+                                <g:message code="nav.caffeine-statistics" />
+                            </g:link>
+                        </li>
+                        <li>
+                            <g:link id="highscores-link" url="[controller: 'caffeine', action: 'highscore']">
+                                <g:message code="nav.highscores"/>
+                            </g:link>
+                        </li>
+                        <li>
+                            <g:link id="kitty-link" url="[controller: 'coffeeKitty', action: 'kitty']">
+                                <g:message code="nav.coffee-kitty" />
+                            </g:link>
+                        </li>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
-                        <li><a id="highscores-link" href="highscore-anon.html"><g:message code="nav.highscores"/></a>
+                        <li>
+                            <g:link id="highscores-link" url="[controller: 'coffeine', action: 'publicHighscore']">
+                                <g:message code="nav.highscores"/>
+                            </g:link>
                         </li>
                     </sec:ifNotLoggedIn>
                 </ul>
                 <sec:ifLoggedIn>
                     <ul class="nav pull-right">
                         <li>
-                            <a id="profile-link" href="profile.html">
+                            <g:link id="profile-link" url="[controller: 'user', action: 'profile']">
                                 <i class="icon-user icon-white"></i>
                                 <g:message code="user.display.with-mail" args="[sec.username(), sec.email()]" />
-                            </a>
+                            </g:link>
                         </li>
                         <li>
                             <g:link id="logout" url="[controller: 'logout']">

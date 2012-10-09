@@ -1,3 +1,5 @@
+import de.kaufda.plat_forms.cafman.security.AuthenticationToken
+
 /**
  * @Plat_Forms GM
  */
@@ -98,8 +100,24 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'de.kaufda.plat_forms.cafman.User'
-grails.plugins.springsecurity.authority.className = 'de.kaufda.plat_forms.cafman.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = de.kaufda.plat_forms.cafman.User.name
+grails.plugins.springsecurity.authority.className = de.kaufda.plat_forms.cafman.Role.name
+
+// more secure encryption
+grails.plugins.springsecurity.password.algorithm = 'bcrypt'
+grails.plugins.springsecurity.password.bcrypt.logrounds = 15
+
+// pessimistic approach, which will secure all pages, if they have no special rule / annotation
+grails.plugins.springsecurity.rejectIfNoRule = false
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+        '/js/**':       [AuthenticationToken.ANONYMOUSLY],
+        '/css/**':      [AuthenticationToken.ANONYMOUSLY],
+        '/images/**':   [AuthenticationToken.ANONYMOUSLY],
+        '/img/**':      [AuthenticationToken.ANONYMOUSLY],
+        '/static/**':   [AuthenticationToken.ANONYMOUSLY],
+        '/':            [AuthenticationToken.ANONYMOUSLY],
+        '/**':          [AuthenticationToken.FULLY]
+]
 
 // admin user configuration
 security.admin.defaults.username = "CafMan.manager"

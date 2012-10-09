@@ -1,5 +1,6 @@
 import de.kaufda.plat_forms.cafman.Role
 import de.kaufda.plat_forms.cafman.User
+import de.kaufda.plat_forms.cafman.security.Authority
 
 /**
  * @author Patrick Jungermann
@@ -17,8 +18,8 @@ class BootStrap {
     }
 
     protected void setupRolesAndAdmin() {
-        findOrSaveRole("ROLE_USER")
-        final Role adminRole = findOrSaveRole("ROLE_ADMIN")
+        findOrSaveRole(Authority.USER)
+        final Role adminRole = findOrSaveRole(Authority.ADMIN)
 
         final ConfigObject adminDefaults = grailsApplication.config.security.admin.defaults
         User admin = User.findByUsername(adminDefaults.username)
