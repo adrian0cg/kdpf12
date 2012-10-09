@@ -30,13 +30,19 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.16'
+        test "org.gmock:gmock:0.8.1"
+        test "org.hamcrest:hamcrest-all:1.1" // used by GMock
     }
 
     plugins {
+        build ":tomcat:$grailsVersion"
+
+        compile ":spring-security-core:1.2.7.3"
+
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.1"
         runtime ":resources:1.1.6"
@@ -46,6 +52,6 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:$grailsVersion"
+        test ":build-test-data:2.0.3"
     }
 }
