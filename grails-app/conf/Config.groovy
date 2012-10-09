@@ -1,4 +1,6 @@
-/* GM */
+/**
+ * @Plat_Forms GM
+ */
 
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
@@ -35,7 +37,7 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.resources.adhoc.patterns = ['/img/*', '/images/*', '/css/*', '/js/*', '/plugins/*']
 
 
 // The default codec used to encode data with ${}

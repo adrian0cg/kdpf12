@@ -1,4 +1,6 @@
-/* GM */
+/**
+ * @Plat_Forms GM
+ **/
 
 grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
