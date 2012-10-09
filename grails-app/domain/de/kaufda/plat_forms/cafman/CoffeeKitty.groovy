@@ -14,6 +14,8 @@ class CoffeeKitty {
 
     User user
 
+    static hasMany = [members: Member]
+
     static constraints = {
         name(unique: true)
     }

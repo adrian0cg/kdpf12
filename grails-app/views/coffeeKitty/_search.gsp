@@ -15,4 +15,3 @@
 </div>
 
 <g:render template="searchResults" bean="${coffeeKitties}" />
-

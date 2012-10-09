@@ -8,11 +8,18 @@ package de.kaufda.plat_forms.cafman
  */
 class CoffeeKittyService {
 
-    grails.gsp.PageRenderer groovyPageRenderer
+    def springSecurityService
 
-    def searchByName(String query) {
+    public List<CoffeeKitty> searchByName(String query) {
         List<CoffeeKitty> coffeeKitties = CoffeeKitty.collection.find( ['name':['$regex':"${query}", '$options': 'i']]).collect{it as CoffeeKitty }
         return coffeeKitties
+    }
+
+    public void join(CoffeeKitty coffeeKitty) {
+        User loggedUser = springSecurityService.getCurrentUser()
+        Member member = new Member(user: loggedUser)
+        coffeeKitty.addToMembers member
+        coffeeKitty.save()
     }
 
 }
