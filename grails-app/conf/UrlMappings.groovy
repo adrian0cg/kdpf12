@@ -5,7 +5,7 @@ class UrlMappings {
 
 	static mappings = {
         "/"(controller: 'user', action: 'home')
-        "/coffeine/public-highscore"(controller: 'coffeine', action: 'publicHighscore')
+        "/caffeine/public-highscore"(controller: 'caffeine', action: 'publicHighscore')
 
 		"/$controller/$action?/$id?"{
 			constraints {
