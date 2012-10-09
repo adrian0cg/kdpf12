@@ -49,7 +49,7 @@
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
                         <li>
-                            <g:link id="highscores-link" url="[controller: 'coffeine', action: 'publicHighscore']">
+                            <g:link id="highscores-link" url="[controller: 'caffeine', action: 'publicHighscore']">
                                 <g:message code="nav.highscores"/>
                             </g:link>
                         </li>
