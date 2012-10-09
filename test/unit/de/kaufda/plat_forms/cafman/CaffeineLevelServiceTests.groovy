@@ -74,4 +74,34 @@ class CaffeineLevelServiceTests {
         // cleanup
         cleanupModifiedMetaClasses()
     }
+
+    void testStatistics() {
+
+        User.metaClass.encodePassword = { -> }
+
+        // some mock data
+        User  u = new User( username: "tester", password: "testing123", email: "test@plat-forms.org", fullName: "The Tester")
+        u.save()
+        Date now = new Date()
+        Calendar cal = Calendar.instance
+        cal.time = now
+        cal.add(Calendar.HOUR, -12)
+        CaffeineIntake ci1 = new CaffeineIntake(consumer: u, taken: cal.time)
+        ci1.save()
+        cal.add(Calendar.HOUR, +6)
+        CaffeineIntake ci2 = new CaffeineIntake(consumer: u, taken: cal.time)
+        ci2.save()
+        cal.add(Calendar.HOUR, +1)
+        CaffeineIntake ci3 = new CaffeineIntake(consumer: u, taken: cal.time)
+        ci3.save()
+
+        Integer thirtyMinutes = 30*60
+        def stats = service.getStatisticsForInterval( u, now-1, now, thirtyMinutes)
+        stats.each { println "$it.key, $it.value" }
+        assertTrue("contains stats for from", stats.containsKey(now-1))
+        assertTrue("contains stats for to", stats.containsKey(now))
+
+        // cleanup
+        cleanupModifiedMetaClasses()
+    }
 }
