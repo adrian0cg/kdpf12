@@ -8,9 +8,13 @@ package de.kaufda.plat_forms.cafman
  */
 class Member {
 
+    static mapWith = "mongo"
+
     MemberState state = MemberState.IN_PROGRESS
 
     Float balance = 0
+
+    User user
 
     static constraints = {}
 

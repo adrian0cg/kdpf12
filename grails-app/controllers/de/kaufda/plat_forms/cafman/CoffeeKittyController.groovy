@@ -32,4 +32,11 @@ class CoffeeKittyController {
         render(template: 'searchResults', model: [coffeeKitties: coffeeKitties])
     }
 
+    def join() {
+        CoffeeKitty coffeeKitty = CoffeeKitty.get(params.id)
+        coffeeKittyService.join(coffeeKitty)
+
+        render member.showMembership(coffeeKitty: coffeeKitty)
+    }
+
 }
