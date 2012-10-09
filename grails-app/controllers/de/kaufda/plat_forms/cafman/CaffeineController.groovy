@@ -12,12 +12,12 @@ class CaffeineController {
 
     def statistics() { }
 
-    @Secured([AuthenticationToken.ANONYMOUSLY])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def publicStatistics() { }
 
     def highscore() { }
 
-    @Secured([AuthenticationToken.ANONYMOUSLY])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def publicHighscore() { }
 
 }

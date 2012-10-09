@@ -2,7 +2,6 @@ package de.kaufda.plat_forms.cafman
 
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 
-import de.kaufda.plat_forms.cafman.security.AuthenticationToken
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse
  * @author Patrick Jungermann
  * @Plat_Forms GM
  */
-@Secured([AuthenticationToken.ANONYMOUSLY])
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class LoginController {
 
     /**
