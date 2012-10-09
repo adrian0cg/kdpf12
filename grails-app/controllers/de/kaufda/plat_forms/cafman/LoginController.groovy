@@ -2,7 +2,9 @@ package de.kaufda.plat_forms.cafman
 
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 
+import de.kaufda.plat_forms.cafman.security.AuthenticationToken
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.CredentialsExpiredException
@@ -13,6 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletResponse
 
+/**
+ * @author Patrick Jungermann
+ * @Plat_Forms GM
+ */
+@Secured([AuthenticationToken.ANONYMOUSLY])
 class LoginController {
 
     /**
@@ -28,11 +35,13 @@ class LoginController {
     /**
      * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
      */
-    def index = {
+    def index() {
         if (springSecurityService.isLoggedIn()) {
+            redirect controller: 'user', action:
+            springSecurityService.principal.id
             redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
-        }
-        else {
+
+        } else {
             redirect action: 'auth', params: params
         }
     }
@@ -40,9 +49,8 @@ class LoginController {
     /**
      * Show the login page.
      */
-    def auth = {
-
-        def config = SpringSecurityUtils.securityConfig
+    def auth() {
+        ConfigObject config = SpringSecurityUtils.securityConfig
 
         if (springSecurityService.isLoggedIn()) {
             redirect uri: config.successHandler.defaultTargetUrl
@@ -58,7 +66,7 @@ class LoginController {
     /**
      * The redirect action for Ajax requests.
      */
-    def authAjax = {
+    def authAjax() {
         response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
         response.sendError HttpServletResponse.SC_UNAUTHORIZED
     }
@@ -66,7 +74,7 @@ class LoginController {
     /**
      * Show denied page.
      */
-    def denied = {
+    def denied() {
         if (springSecurityService.isLoggedIn() &&
                 authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
             // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY

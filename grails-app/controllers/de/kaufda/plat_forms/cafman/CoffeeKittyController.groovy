@@ -10,15 +10,26 @@ class CoffeeKittyController {
 
     def springSecurityService
 
+    def coffeeKittyService
+
     def kitty() {}
+
+    def kittyAdmin() {
+        render(view: 'kitty-admin')
+    }
 
     def save() {
         CoffeeKitty coffeeKitty = new CoffeeKitty(params)
         coffeeKitty.user = springSecurityService.getCurrentUser()
         if (coffeeKitty.validate() && coffeeKitty.save()) {
-            return render()
+            return redirect(action: 'kittyAdmin')
         }
-        return render()
+        return redirect(action: 'kitty')
+    }
+
+    def search() {
+        List<CoffeeKitty> coffeeKitties = coffeeKittyService.searchByName(params.query)
+        render(template: 'searchResults', model: [coffeeKitties: coffeeKitties])
     }
 
 }
