@@ -10,6 +10,8 @@ class CoffeeKittyController {
 
     def springSecurityService
 
+    def coffeeKittyService
+
     def kitty() {}
 
     def save() {
@@ -19,6 +21,11 @@ class CoffeeKittyController {
             return render()
         }
         return render()
+    }
+
+    def search() {
+        List<CoffeeKitty> coffeeKitties = coffeeKittyService.searchByName(params.query)
+        render(text: 'todo implement')
     }
 
 }
