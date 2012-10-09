@@ -16,7 +16,7 @@ class CaffeineIntake {
     /**
      * The dose of this Caffeine Intake in [mg]
      */
-    Double dose = 150
+    Double dose = 150D
     /**
      * The User that consumes the Caffeine
      */
