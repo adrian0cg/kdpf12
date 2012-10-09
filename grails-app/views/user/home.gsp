@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="layout" content="cafman"/>
+    <meta name="layout" content="cafman" />
 </head>
 
 <body>

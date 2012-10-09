@@ -1,14 +1,23 @@
 package de.kaufda.plat_forms.cafman
 
+import de.kaufda.plat_forms.cafman.security.AuthenticationToken
+import grails.plugins.springsecurity.Secured
+
 /**
  * @Plat_Forms M
  */
 class CaffeineController {
 
-    static defaultAction = "caffeine"
+    static defaultAction = "statistics"
 
-    def caffeine() { }
+    def statistics() { }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def publicStatistics() { }
 
     def highscore() { }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def publicHighscore() { }
 
 }
