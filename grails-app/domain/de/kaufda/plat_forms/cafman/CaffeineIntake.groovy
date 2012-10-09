@@ -3,6 +3,7 @@ package de.kaufda.plat_forms.cafman
 /**
  * Represents a dose of caffeine that a user takes (i.e. cup of coffee)
  * @Plat_Forms M
+ * @author Adrian Hass
  */
 class CaffeineIntake {
 
@@ -13,7 +14,7 @@ class CaffeineIntake {
     /**
      * The dose of this Caffeine Intake in [mg]
      */
-    Integer dose = 150
+    Double dose = 150
     /**
      * The User that consumes the Caffeine
      */
