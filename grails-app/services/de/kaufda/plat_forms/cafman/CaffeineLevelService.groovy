@@ -1,5 +1,7 @@
 package de.kaufda.plat_forms.cafman
 
+import groovy.time.*
+
 class CaffeineLevelService {
 
     static double oneHour = 60*60*1000
@@ -43,24 +45,29 @@ class CaffeineLevelService {
         return level
     }
 
-    def Map getStatisticsForInterval(User user, Date from, Date to, Long stepSizeSeconds) {
-        Date lastFrom = from -1
-        // get all intakes from beginning of statistics
-        def statisticallyRelevantIntakes = CaffeineIntake.findAllByConsumerAndTakenGreaterThan(comsumer: user, taken: lastFrom)
-        def result = [:]
-        Calendar cal = Calendar.instance
-        for (cal.time = from; cal.add(Calendar.SECOND,stepSizeSeconds); cal.before(to)) {
-            // calc sum over relevant intakes for that time interval
-            Double value = statisticallyRelevantIntakes.findAll {
-                // all within the last day
-                it.time > cal.time - 1
-            }.collect {
-                // emit current value
-                calculateCaffeineUptake(cal.timeInMillis - it.taken.time)
-            }.sum (0) as Double //sum from 0
-            // save value
-            result.putAt(cal.time)
+    def getStatisticsForInterval (User user, Date from, Date to, Integer stepSizeSeconds) {
+        def results = [:]
+        use(TimeCategory) {
+            Date lastRelevantFrom = from - 1.day
+            // get all intakes from beginning of statistics
+            def statisticallyRelevantIntakes = CaffeineIntake.findAllByConsumerAndTakenGreaterThan(user, lastRelevantFrom)
+            for (def t = from; t <= to; t += stepSizeSeconds.seconds) {
+                // calc sum over relevant intakes for that time interval
+                Double value = 0
+                def relevantIntakes = statisticallyRelevantIntakes.findAll {
+                    // all within the last day
+                    it.taken > t - 1.day
+                }
+                def uptakes = relevantIntakes.collect {
+                    // emit current value
+                    calculateCaffeineUptake t.time - it.taken.time
+                }
+                value = uptakes.sum(0) as Double //sum from 0
+                // save value
+                results.putAt(t,value)
+            }
         }
+        return results
     }
 
     def Map getHighscoresForInterval(Date since, Integer max = 10) {
