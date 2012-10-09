@@ -5,6 +5,8 @@ package de.kaufda.plat_forms.cafman
  */
 class CaffeineLevelAlert {
 
+    static mapWith = "mongo"
+
     /**
      * the precomputed time then the caffeine level will drop below the threshold
      * always in the future

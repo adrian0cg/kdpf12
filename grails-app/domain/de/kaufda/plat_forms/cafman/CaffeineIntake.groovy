@@ -7,6 +7,8 @@ package de.kaufda.plat_forms.cafman
  */
 class CaffeineIntake {
 
+    static mapWith = "mongo"
+
     /**
      * Timestamp of consuption
      */
