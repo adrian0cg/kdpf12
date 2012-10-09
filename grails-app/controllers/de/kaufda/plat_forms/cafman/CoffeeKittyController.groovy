@@ -1,6 +1,8 @@
 package de.kaufda.plat_forms.cafman
 
 /**
+ * Controller manage a flow of coffee kitty interactions.
+ *
  * @Plat_Forms M
  * @author: Krzysztof Kachel
  */

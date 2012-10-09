@@ -1,7 +1,7 @@
 package de.kaufda.plat_forms.cafman
 
 /**
- * CoffeeKitty domain class.
+ * Domain class for persisting coffee kitties.
  *
  * @Plat_Forms M
  * @author: Krzysztof Kachel

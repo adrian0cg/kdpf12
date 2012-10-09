@@ -10,7 +10,7 @@
 <body>
 
 <div class="page-header notifications">
-    <h1>Notifications</h1>
+    <h1><g:message code="coffeeKitty.view.kitty.notifications.title" /></h1>
 
     <div class="alert alert-info">
         John Smith (CoffeePapa) has requested to become a member of "The Addicts".
@@ -34,14 +34,14 @@
 </div>
 
 <div class="page-header">
-    <h1>Manage Your Coffee Kittys</h1>
+    <h1><g:message code="coffeeKitty.view.kitty.manage.title" /></h1>
 </div>
 
 <div class="row">
     <div class="span6">
         <p>
 
-        <h2>Overview</h2>
+        <h2><g:message code="coffeeKitty.view.kitty.overview.title" /></h2>
         <table class="table table-condensed">
             <thead>
             <tr><th>Coffee Kitty</th><th>Account Balance</th><th></th></tr>
@@ -58,7 +58,7 @@
 
 <div class="row">
     <div class="span6">
-        <h2>start a new coffee kitty</h2>
+        <h2><g:message code="coffeeKitty.view.kitty.new.title" /></h2>
 
         <p>
 

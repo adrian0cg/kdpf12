@@ -3,14 +3,14 @@
 
         <g:if test="${coffeeKitties?.size() > 0}">
 
-            <h3>Search results:</h3>
+            <h3><g:message code="coffeeKitty.view.kitty.search.title" /></h3>
 
             <p>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Action</th>
+                    <th><g:message code="coffeeKitty.view.kitty.searchResults.name" /></th>
+                    <th><g:message code="coffeeKitty.view.kitty.searchResults.action" /></th>
                 </tr>
                 </thead>
                 <tbody>
