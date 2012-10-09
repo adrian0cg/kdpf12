@@ -29,5 +29,6 @@ class CaffeineIntake {
 
     static constraints = {
         dose min: 0.0D
+        peakLevel nullable: true
     }
 }

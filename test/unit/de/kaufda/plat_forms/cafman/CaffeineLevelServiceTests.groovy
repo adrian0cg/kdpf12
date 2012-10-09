@@ -14,7 +14,7 @@ import grails.plugins.springsecurity.SpringSecurityService
  * @author Adrian Hass
  */
 @TestFor(CaffeineLevelService)
-@Mock([User, CaffeineIntake, SpringSecurityService])
+@Mock([User, CaffeineIntake])
 class CaffeineLevelServiceTests {
 
     void testUptakeCalculation() {
@@ -39,16 +39,18 @@ class CaffeineLevelServiceTests {
 
     void testLevelCalculation() {
 
+        User.metaClass.encodePassword = { -> }
+
         // some mock data
-        mockDomain(User, [new User(username: "tester", password: "testing123", email: "test@plat-forms.org", fullName: "The Tester")])
-        def u = User.findByUsername("tester")
-        mockDomain(CaffeineIntake, [
-                new CaffeineIntake(consumer: u, taken: now-1),
-                new CaffeineIntake(consumer: u, taken: now)
-        ])
+        User  u = new User( username: "tester", password: "testing123", email: "test@plat-forms.org", fullName: "The Tester")
+        u.save()
+        Date now = new Date()
+        CaffeineIntake ci1 = new CaffeineIntake(consumer: u, taken: now-1)
+        ci1.save()
+        CaffeineIntake ci2 = new CaffeineIntake(consumer: u, taken: now)
+        ci2.save()
 
         // do calc
-        Date now = new Date()
         Calendar cal = Calendar.instance
         cal.time = now
         // wind back 5h
