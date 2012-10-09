@@ -1,34 +1,14 @@
 package de.kaufda.plat_forms.cafman
 
-import static de.kaufda.plat_forms.cafman.CaffeineLevel.*
-
 class CaffeineLevelService {
 
     static double oneHour = 60*60*1000
 
-    List<CaffeineLevel> findCaffeineLevelsForUser(User u) {
-        return findAll(new CaffeineLevel( user: u))
-    }
-
-    def void updateUserCaffeineLevels(CaffeineIntake intake) {
-
-        // find existing levels
-        List<CaffeineLevel> oldLevels = findCaffeineLevelsForUser(intake.consumer)
-        // drop old ones
-        Date now = new Date()
-        Long ts = now.time
-        Date normalizedTs = CaffeineLevel.normalizeTime ts
-        for (it in oldLevels) {
-            if (it.time < normalizedTs) it.delete()
-        }
-        // forward calc levels until +24h
-        def futureSteps = []
-
-        updateAlertForIntake intake
-        // cleanup old values
-    }
-
     def CaffeineLevelAlert updateAlertForIntake(CaffeineIntake intake) {
+        // if current level is below TH, send mail immediately
+        //  if also level will shoot over level later, then send special mail "but you'll be save soon"
+        //  else just send one "insufficient caffeine"
+        // else
         // recalculate the new threshold intersection for the updated levels in the future
     }
 
@@ -45,5 +25,20 @@ class CaffeineLevelService {
         else if (h < 1.0) return unitDose*h*((0.5)**(h/5))
         // return value from exponentially decaying function <24h
         else return unitDose*(0.5)**(h/5)
+    }
+
+    def Double calculateCaffeineLevel(User user, Date at) {
+        // get all Intakes within -24h before at
+        def relevantIntakes = CaffeineIntake.findAllByConsumerAndTakenGreaterThan(user:user, taken: at)
+        // sum over influence of these intakes
+        double level = 0.0d
+        relevantIntakes.each {
+            level += calculateCaffeineUptake(at.time - it.taken.time)
+        }
+        return level
+    }
+
+    def Map getHighscoresForInterval(Date since, Integer max = 10) {
+
     }
 }
