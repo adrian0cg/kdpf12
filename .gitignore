@@ -11,3 +11,6 @@ eclipse
 /plugins
 /web-app/plugins
 /web-app/WEB-INF/classes
+atlassian-ide-plugin.xml
+coverage.db
+out

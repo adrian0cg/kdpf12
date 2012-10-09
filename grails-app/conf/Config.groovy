@@ -106,3 +106,6 @@ security.admin.defaults.username = "CafMan.manager"
 security.admin.defaults.fullName = "CafMan Manager"
 security.admin.defaults.password = "admin"
 security.admin.defaults.email = "organizers@platf-form.org"
+
+// default values for calculation of caffeine uptake
+cafman.timeStep.length.millis = 60L //seconds
