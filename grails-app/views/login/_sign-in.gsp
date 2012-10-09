@@ -5,12 +5,12 @@
 <h2><g:message code="index.unauthorized.sign-in.headline" /></h2>
 
 <p>
-    <form class="form-horizontal" action="index-authd.html">
+    <form id="loginForm" class="form-horizontal" action="${postUrl}" method="POST" autocomplete="off">
         <div class="control-group">
-            <label class="control-label" for="signin-email"><g:message code="user.email" /></label>
+            <label class="control-label" for="signin-email"><g:message code="user.username_or_email" /></label>
 
             <div class="controls">
-                <input type="text" id="signin-email" placeholder="${g.message(code: 'user.email.example')}"/>
+                <input type="text" id="signin-email" name="j_username" placeholder="${g.message(code: 'user.username_or_email.example')}"/>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
             <label class="control-label" for="signin-password"><g:message code="user.password" /></label>
 
             <div class="controls">
-                <input type="password" id="signin-password" placeholder="${g.message(code: 'user.password.example')}"/>
+                <input type="password" id="signin-password" name="j_password" placeholder="${g.message(code: 'user.password.example')}"/>
             </div>
         </div>
 
@@ -29,3 +29,9 @@
         </div>
     </form>
 </p>
+
+<r:script>
+    (function() {
+        document.forms['loginForm'].elements['j_username'].focus();
+    })();
+</r:script>

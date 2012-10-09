@@ -29,21 +29,30 @@ class MongoUserDetailsService implements GrailsUserDetailsService {
     static final List<GrantedAuthorityImpl> NO_ROLES = [new GrantedAuthorityImpl(SpringSecurityUtils.NO_ROLE)].asImmutable()
 
     @Override
-    UserDetails loadUserByUsername(String username, boolean loadRoles) {
+    UserDetails loadUserByUsername(final String username) {
+        return loadUserByUsername(username, true)
+    }
+
+    @Override
+    UserDetails loadUserByUsername(final String username, final boolean loadRoles) {
+        return loadUserByUsernameOrEmail(username, loadRoles)
+    }
+
+    UserDetails loadUserByUsernameOrEmail(final String usernameOrEmail, final boolean loadRoles) {
         if (log.debugEnabled) {
-            log.debug "Attempted user logon: $username"
+            log.debug "Attempted user logon: $usernameOrEmail"
         }
 
         User.withTransaction { status ->
-            User user = User.findByUsername(username)
+            final User user = User.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
 
             if (!user) {
-                log.warn "User not found: $username"
-                throw new UsernameNotFoundException('User not found', username)
+                log.warn "User not found: $usernameOrEmail"
+                throw new UsernameNotFoundException('User not found', usernameOrEmail)
             }
 
             if (log.debugEnabled) {
-                log.debug "User found: $username"
+                log.debug "User found: $usernameOrEmail"
             }
 
             List<GrantedAuthorityImpl> roles = NO_ROLES
@@ -62,12 +71,7 @@ class MongoUserDetailsService implements GrailsUserDetailsService {
         }
     }
 
-    @Override
-    UserDetails loadUserByUsername(String username) {
-        return loadUserByUsername(username, true)
-    }
-
-    protected UserDetails createUserDetails(User user, Collection<GrantedAuthorityImpl> authorities) {
+    protected UserDetails createUserDetails(final User user, final Collection<GrantedAuthorityImpl> authorities) {
         new GrailsUser(user.username, user.password, user.enabled,
                 !user.accountExpired, !user.passwordExpired,
                 !user.accountLocked, authorities, user.id)
