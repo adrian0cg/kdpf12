@@ -18,11 +18,11 @@ class SignUpController {
 
     def index(final SignUpCommand cmd) {
         cmd.validate()
-        final boolean validPassword = cmd.errors.getFieldError('password').asBoolean()
+        final boolean invalidPassword = cmd.errors.getFieldError('password').asBoolean()
         final User user = new User(
                 username: cmd.username,
                 email: cmd.email,
-                password: validPassword ? cmd.password : null,
+                password: invalidPassword ? null : cmd.password,
                 showStats: cmd.showStats,
                 fullName: cmd.fullName,
                 authorities: [Role.findByAuthority(Authority.USER)]
