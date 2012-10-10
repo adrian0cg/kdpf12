@@ -31,6 +31,7 @@ class User {
     boolean showStats = Boolean.FALSE
 
     static hasMany = [authorities: Role]
+    CoffeeKitty defaultCoffeeKitty = null
 
     static constraints = {
 		username blank: false, unique: true

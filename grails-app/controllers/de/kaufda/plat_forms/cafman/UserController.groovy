@@ -11,8 +11,9 @@ import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
  */
 class UserController {
 
-    def springSecurityService
     def passwordEncoder
+    def springSecurityService
+    def coffeeKittyService
 
     def home() {
         if (SpringSecurityUtils.ifAllGranted(Authority.ADMIN)) {
@@ -26,10 +27,14 @@ class UserController {
     }
 
     def profile() {
+        final User user = (User) springSecurityService.currentUser
+        final List<CoffeeKitty> coffeeKitties = coffeeKittyService.findAllWhereLoggedUserIsAMember()
         return [
-                user: chainModel?.user ?: springSecurityService.currentUser,
-                cmd: chainModel?.cmd,
-                denied: chainModel?.denied
+                user: user,
+                bean: chainModel?.user ?: user,
+                data: chainModel?.cmd ?: chainModel?.user ?: user,
+                denied: chainModel?.denied,
+                coffeeKitties: coffeeKitties
         ]
     }
 
@@ -52,11 +57,22 @@ class UserController {
                 return
             }
 
-            chain controller: 'user', action:  'profile', model: [cmd: cmd, user: user]
+            chain action: 'profile', model: [cmd: cmd, user: user]
             return
         }
 
-        chain controller: 'user', action:  'profile', model: [cmd: cmd, denied: true]
+        chain controller: 'user', action: 'profile', model: [cmd: cmd, denied: true]
+    }
+
+    def changeCoffeeKitty(final Long id) {
+        final CoffeeKitty coffeeKitty = CoffeeKitty.get(id)
+        if (coffeeKitty) {
+            final User user = (User) springSecurityService.currentUser
+            user.defaultCoffeeKitty = coffeeKitty
+            user.save()
+        }
+
+        redirect action: 'profile'
     }
 
 }
