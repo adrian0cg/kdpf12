@@ -21,7 +21,7 @@ class CoffeeKittyController {
 
     def kittyAdmin() {
         CoffeeKitty coffeeKitty = CoffeeKitty.get(params.id)
-        render(view: 'kitty-admin', model: [coffeeKitty: coffeeKitty])
+        render(view: 'kitty-admin', model: [coffeeKitty: coffeeKitty, invalidPrice: params.getBoolean('invalidPrice')])
     }
 
     def save() {
@@ -52,6 +52,23 @@ class CoffeeKittyController {
         CoffeeKitty coffeeKitty = CoffeeKitty.get(params.id)
         coffeeKittyService.join(coffeeKitty)
         render member.showMembership(coffeeKitty: coffeeKitty)
+    }
+
+    def changePrice(final Long id, final Double price) {
+        final CoffeeKitty coffeeKitty = CoffeeKitty.get(id)
+        if (coffeeKitty && coffeeKitty.user.id == springSecurityService.currentUser.id) {
+            coffeeKitty.price = price
+
+            final Map params = [:]
+            if (!coffeeKitty.save()) {
+                params.invalidPrice = true
+            }
+
+            redirect action: 'kittyAdmin', id: id, params: params
+            return
+        }
+
+        redirect action: 'kitty'
     }
 
 }
