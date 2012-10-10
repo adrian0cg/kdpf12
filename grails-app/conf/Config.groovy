@@ -127,3 +127,4 @@ security.admin.defaults.email = "organizers@platf-form.org"
 
 // default values for calculation of caffeine uptake
 cafman.timeStep.length.millis = 60L //seconds
+cafman.unitDose.amount.mg = 150D

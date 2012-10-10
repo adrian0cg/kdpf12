@@ -11,14 +11,14 @@ class CaffeineController {
 
     static defaultAction = "statistics"
 
-    def statistics() { }
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def statistics(User user) {
+        render "Stats $user"
+    }
 
-    @Secured([ANONYMOUSLY])
-    def publicStatistics() { }
-
-    def highscore() { }
-
-    @Secured([ANONYMOUSLY])
-    def publicHighscore() { }
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def highscore(User user) {
+        render "Highscore $user"
+    }
 
 }
