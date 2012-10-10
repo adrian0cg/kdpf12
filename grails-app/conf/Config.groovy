@@ -105,7 +105,6 @@ grails.plugins.springsecurity.authority.className = de.kaufda.plat_forms.cafman.
 
 // more secure encryption
 grails.plugins.springsecurity.password.algorithm = 'bcrypt'
-grails.plugins.springsecurity.password.bcrypt.logrounds = 15
 
 // pessimistic approach, which will secure all pages, if they have no special rule / annotation
 grails.plugins.springsecurity.rejectIfNoRule = false
