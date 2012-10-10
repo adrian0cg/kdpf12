@@ -42,6 +42,8 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
+        username index: true
+        email index: true
 	}
 
 	def beforeInsert() {
