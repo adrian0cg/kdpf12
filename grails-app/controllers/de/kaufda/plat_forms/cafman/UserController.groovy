@@ -1,6 +1,7 @@
 package de.kaufda.plat_forms.cafman
 
 import de.kaufda.plat_forms.cafman.security.Authority
+import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 /**
@@ -14,6 +15,7 @@ class UserController {
     def passwordEncoder
     def springSecurityService
     def coffeeKittyService
+    def resetService
 
     def home() {
         if (SpringSecurityUtils.ifAllGranted(Authority.ADMIN)) {
@@ -86,6 +88,13 @@ class UserController {
         if (coffeeKitty && coffeeKitty.findMemberByUser(user)) {
             session.coffeeKitty = coffeeKitty
         }
+
+        redirect action: 'home'
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def reset = {
+        resetService.reset()
 
         redirect action: 'home'
     }
