@@ -20,19 +20,14 @@
 <div class="row">
     <div class="span6">
         <h2><g:message code="coffeeKitty.view.kitty.new.title" /></h2>
-
         <p>
-
-        <g:form class="form-inline" action="save">
-            <input id="create-name" type="text" class="input-xlarge" placeholder="coffee kitty name" name="name">
-            <button id="create-submit" type="sbumit" class="btn">Create kitty</button>
-        </g:form>
+        <g:render template="create" />
     </p>
     </div>
 </div>
 <hr>
 
-<g:render template="search" bean="${coffeeKitties}" />
+<g:render template="search" />
 
 </body>
 </html>

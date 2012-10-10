@@ -28,6 +28,11 @@ class Member {
 
     static constraints = {}
 
+    static mapping = {
+        user index:true
+        compoundIndex coffeeKittyOwnerId:1, state:1
+    }
+
     public CoffeeKitty findCoffeeKitty() {
         CoffeeKitty.get(coffeeKittyId)
     }

@@ -10,7 +10,7 @@ import grails.test.mixin.TestFor
 @TestFor(SignUpController)
 class SignUpControllerTests {
 
-    void testSomething() {
+    void index() {
         fail "Implement me"
     }
 

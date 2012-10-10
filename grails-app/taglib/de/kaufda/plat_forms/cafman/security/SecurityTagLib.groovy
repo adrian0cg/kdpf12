@@ -13,13 +13,13 @@ class SecurityTagLib {
 
     def springSecurityService
 
-    def fullName = {
+    def userFullName = {
         if (springSecurityService.isLoggedIn()) {
             out << springSecurityService.getCurrentUser().fullName?.encodeAsHTML()
         }
     }
 
-    def email = {
+    def userEmail = {
         if (springSecurityService.isLoggedIn()) {
             out << springSecurityService.getCurrentUser().email?.encodeAsHTML()
         }

@@ -11,6 +11,7 @@ class CoffeeKitty {
     static mapWith = "mongo"
 
     String name
+    Double price = 0.30d
 
     User user
 
@@ -18,6 +19,7 @@ class CoffeeKitty {
 
     static constraints = {
         name(unique: true)
+        price(min: 0d)
     }
 
     static mapping = {

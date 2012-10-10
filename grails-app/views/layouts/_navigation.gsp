@@ -60,7 +60,7 @@
                         <li>
                             <g:link elementId="profile-link" url="[controller: 'user', action: 'profile']">
                                 <i class="icon-user icon-white"></i>
-                                <g:message code="user.display.with-mail" args="[sec.username(), sec.email()]" />
+                                <g:message code="user.display.with-mail" args="[sec.username(), sec.userEmail()]" />
                             </g:link>
                         </li>
                         <li>

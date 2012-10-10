@@ -38,10 +38,13 @@ class User {
 		password blank: false
         email email: true, unique: true
         fullName blank: false, nullable: false
+        defaultCoffeeKitty nullable: true
 	}
 
 	static mapping = {
 		password column: '`password`'
+        username index: true
+        email index: true
 	}
 
 	def beforeInsert() {

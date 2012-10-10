@@ -17,13 +17,13 @@ class UserController {
 
     def home() {
         if (SpringSecurityUtils.ifAllGranted(Authority.ADMIN)) {
-            render view: 'home-admin'
+            return render(view: 'home-admin')
 
-        } else if (CoffeeKitty.countByUser((User) springSecurityService.currentUser) == 0) {
-            render view: 'home-no-kitty'
+        } else if (!coffeeKittyService.findAllWhereLoggedUserIsAMember()) {
+            return render(view: 'home-no-kitty')
         }
 
-        render view: 'home'
+        return render(view: 'home')
     }
 
     def profile() {
