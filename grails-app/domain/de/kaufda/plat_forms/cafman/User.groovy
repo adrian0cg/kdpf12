@@ -19,10 +19,10 @@ class User {
 
     String username
 	String password
-    boolean enabled
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+    boolean enabled = Boolean.TRUE
+	boolean accountExpired = Boolean.FALSE
+	boolean accountLocked = Boolean.FALSE
+	boolean passwordExpired = Boolean.FALSE
 
     String fullName
     String email
@@ -34,7 +34,7 @@ class User {
 		username blank: false, unique: true
 		password blank: false
         email email: true, unique: true
-        // Todo add needed validation
+        fullName blank: false, nullable: false
 	}
 
 	static mapping = {

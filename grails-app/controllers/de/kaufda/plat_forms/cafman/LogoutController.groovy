@@ -3,11 +3,13 @@ package de.kaufda.plat_forms.cafman
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
+import static de.kaufda.plat_forms.cafman.security.AuthenticationToken.ANONYMOUSLY
+
 /**
  * @author Patrick Jungermann
  * @Plat_Forms GM
  */
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+@Secured([ANONYMOUSLY])
 class LogoutController {
 
     /**

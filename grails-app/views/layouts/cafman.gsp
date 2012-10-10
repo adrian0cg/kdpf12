@@ -29,6 +29,10 @@
 <g:render template="/layouts/navigation" />
 
 <div class="container">
+    <sec:ifLoggedIn>
+        <notifications:show/>
+    </sec:ifLoggedIn>
+
     <g:layoutBody/>
 
     <hr />

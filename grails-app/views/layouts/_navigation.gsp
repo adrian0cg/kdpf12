@@ -14,7 +14,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="dropdown active">
-                        <g:link id="home-link" url="[controller: 'user', action: 'home']" class="dropdown-toggle" data-toggle="dropdown">
+                        <g:link elementId="home-link" url="[controller: 'user', action: 'home']" class="dropdown-toggle" data-toggle="dropdown">
                             <g:message code="nav.home"/>
                             <b class="caret"></b>
                         </g:link>
@@ -32,24 +32,24 @@
                     </li>
                     <sec:ifLoggedIn>
                         <li>
-                            <g:link id="caffeine-link"  url="[controller: 'caffeine', action: 'statistics']">
+                            <g:link elementId="caffeine-link"  url="[controller: 'caffeine', action: 'statistics']">
                                 <g:message code="nav.caffeine-statistics" />
                             </g:link>
                         </li>
                         <li>
-                            <g:link id="highscores-link" url="[controller: 'caffeine', action: 'highscore']">
+                            <g:link elementId="highscores-link" url="[controller: 'caffeine', action: 'highscore']">
                                 <g:message code="nav.highscores"/>
                             </g:link>
                         </li>
                         <li>
-                            <g:link id="kitty-link" url="[controller: 'coffeeKitty', action: 'kitty']">
+                            <g:link elementId="kitty-link" url="[controller: 'coffeeKitty', action: 'kitty']">
                                 <g:message code="nav.coffee-kitty" />
                             </g:link>
                         </li>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
                         <li>
-                            <g:link id="highscores-link" url="[controller: 'caffeine', action: 'publicHighscore']">
+                            <g:link elementId="highscores-link" url="[controller: 'caffeine', action: 'publicHighscore']">
                                 <g:message code="nav.highscores"/>
                             </g:link>
                         </li>
@@ -58,13 +58,13 @@
                 <sec:ifLoggedIn>
                     <ul class="nav pull-right">
                         <li>
-                            <g:link id="profile-link" url="[controller: 'user', action: 'profile']">
+                            <g:link elementId="profile-link" url="[controller: 'user', action: 'profile']">
                                 <i class="icon-user icon-white"></i>
                                 <g:message code="user.display.with-mail" args="[sec.username(), sec.email()]" />
                             </g:link>
                         </li>
                         <li>
-                            <g:link id="logout" url="[controller: 'logout']">
+                            <g:link elementId="logout" url="[controller: 'logout']">
                                 <i class="icon-off icon-white"></i>
                                 <g:message code="nav.sign-out"/>
                             </g:link>

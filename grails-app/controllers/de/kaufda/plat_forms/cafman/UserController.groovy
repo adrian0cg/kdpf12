@@ -4,6 +4,7 @@ import de.kaufda.plat_forms.cafman.security.Authority
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 /**
+ * @author Patrick Jungermann
  * @Plat_Forms M
  */
 class UserController {
@@ -17,8 +18,14 @@ class UserController {
         } else if (CoffeeKitty.countByUser((User) springSecurityService.currentUser) == 0) {
             render view: 'home-no-kitty'
         }
+
+        render view: 'home'
     }
 
-    def profile() { }
+    def profile() {
+        return [
+                user: springSecurityService.currentUser
+        ]
+    }
 
 }
