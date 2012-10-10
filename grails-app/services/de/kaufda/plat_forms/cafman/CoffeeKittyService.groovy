@@ -4,7 +4,7 @@ package de.kaufda.plat_forms.cafman
  * Service for managing CoffeeKitty documents.
  *
  * @author Krzysztof Kachel
- * @Plat_Forms GM
+ * @Plat_Forms M
  */
 class CoffeeKittyService {
 
@@ -15,9 +15,13 @@ class CoffeeKittyService {
         return coffeeKitties
     }
 
-    public void join(CoffeeKitty coffeeKitty) {
+    public void join(CoffeeKitty coffeeKitty, boolean isOwnerOfCoffeeKitty = false) {
         User loggedUser = springSecurityService.getCurrentUser()
-        Member member = new Member(user: loggedUser, coffeeKittyOwnerId: loggedUser?.id, coffeeKittyId: coffeeKitty?.id)
+        Member member = new Member(user: loggedUser, coffeeKittyOwnerId: coffeeKitty?.user?.id, coffeeKittyId: coffeeKitty?.id)
+        // If user is a owner of coffee kitty the membership is automatically accepted.
+        if(isOwnerOfCoffeeKitty) {
+            member.state = MemberState.ACCEPTED
+        }
         coffeeKitty.addToMembers member
         coffeeKitty.save()
     }

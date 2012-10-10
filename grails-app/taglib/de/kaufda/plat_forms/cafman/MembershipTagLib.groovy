@@ -17,7 +17,7 @@ class MembershipTagLib {
     def showMembership = { attrs, body ->
         CoffeeKitty coffeeKitty = attrs.coffeeKitty
         User loggedUser = springSecurityService.getCurrentUser()
-        Member member = coffeeKitty?.members.find { it.user?.id = loggedUser?.id }
+        Member member = coffeeKitty?.members.find { it.user?.id == loggedUser?.id }
 
         if(!member || member.state == MemberState.REJECTED) {
             out << render(template:"/coffeeKitty/notAMember", model:[coffeeKitty: coffeeKitty])

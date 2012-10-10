@@ -25,10 +25,10 @@ class CoffeeKitty {
     }
 
     public Member findMemberByUser(User user) {
-        members.find { it.user == user }
+        members?.find { it.user == user }
     }
 
-    public Float findBalanceByUser(User user) {
+    public Double findBalanceByUser(User user) {
         Member member = findMemberByUser(user)
         if(!member) {
             return null

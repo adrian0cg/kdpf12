@@ -21,28 +21,28 @@ class CoffeeKittyController {
     }
 
     def kittyAdmin() {
-        render(view: 'kitty-admin')
+        CoffeeKitty coffeeKitty = CoffeeKitty.get(params.id)
+        render(view: 'kitty-admin', model: [coffeeKitty: coffeeKitty])
     }
 
     def save() {
         CoffeeKitty coffeeKitty = new CoffeeKitty(params)
         coffeeKitty.user = springSecurityService.getCurrentUser()
         if (coffeeKitty.validate() && coffeeKitty.save()) {
-            coffeeKittyService.join(coffeeKitty)
-            return redirect(action: 'kittyAdmin')
+            coffeeKittyService.join(coffeeKitty, true)
+            return redirect(action: 'kittyAdmin', id: coffeeKitty.id)
         }
         return redirect(action: 'kitty')
     }
 
     def search() {
-        List<CoffeeKitty> coffeeKitties = coffeeKittyService.searchByName(params.query)
-        render(template: 'searchResults', model: [coffeeKitties: coffeeKitties])
+        List<CoffeeKitty> searchResult = coffeeKittyService.searchByName(params.query)
+        render(template: 'searchResults', model: [searchResult: searchResult])
     }
 
     def join() {
         CoffeeKitty coffeeKitty = CoffeeKitty.get(params.id)
         coffeeKittyService.join(coffeeKitty)
-
         render member.showMembership(coffeeKitty: coffeeKitty)
     }
 
