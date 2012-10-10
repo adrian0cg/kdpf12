@@ -9,14 +9,12 @@
 
 <body>
 
-<notify:membership/>
-
 <div class="page-header">
     <h1><g:message code="coffeeKitty.view.kitty.manage.title" /></h1>
 </div>
 
 
-<g:render template="overview" model="['coffeeKitties':coffeeKitties, loggedUser: loggedUser]" />
+<g:render template="overview" model="['coffeeKitties': coffeeKitties, 'loggedUser': loggedUser]" />
 
 
 <div class="row">

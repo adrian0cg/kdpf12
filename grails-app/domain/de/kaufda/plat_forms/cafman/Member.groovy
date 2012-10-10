@@ -28,7 +28,7 @@ class Member {
 
     static constraints = {}
 
-    public CoffeeKitty getCoffeeKitty() {
+    public CoffeeKitty findCoffeeKitty() {
         CoffeeKitty.get(coffeeKittyId)
     }
 

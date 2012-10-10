@@ -25,7 +25,10 @@ class CoffeeKitty {
     }
 
     public Member findMemberByUser(User user) {
-        members?.find { it.user == user }
+        if(!this.members || !user) {
+            return null
+        }
+        return this.members?.find { it.user == user }
     }
 
     public Double findBalanceByUser(User user) {
