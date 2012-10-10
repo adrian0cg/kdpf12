@@ -13,6 +13,16 @@ class UrlMappings {
 			}
 		}
 
+        "/statistics/$user/$timestamp/$interval" {
+            controller = "caffeine"
+            action = "single"
+            constraints {
+                interval( inList: ['daily','weekly'])
+            }
+
+        }
+
+
 		"500"(view:'/error')
 	}
 }
