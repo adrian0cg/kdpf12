@@ -105,7 +105,6 @@ grails.plugins.springsecurity.authority.className = de.kaufda.plat_forms.cafman.
 
 // more secure encryption
 grails.plugins.springsecurity.password.algorithm = 'bcrypt'
-grails.plugins.springsecurity.password.bcrypt.logrounds = 15
 
 // pessimistic approach, which will secure all pages, if they have no special rule / annotation
 grails.plugins.springsecurity.rejectIfNoRule = false
@@ -123,7 +122,14 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 security.admin.defaults.username = "CafMan.manager"
 security.admin.defaults.fullName = "CafMan Manager"
 security.admin.defaults.password = "admin"
-security.admin.defaults.email = "organizers@platf-form.org"
+security.admin.defaults.email = "organizers@plat-forms.org"
 
 // default values for calculation of caffeine uptake
-cafman.timeStep.length.millis = 60L //seconds
+cafman.timeStep.length.millis = 60 //seconds
+cafman.unitDose.amount.mg = 150D
+
+cafman.statistics.export.stepSize = 30*60  //30mins
+cafman.statistics.weekly.stepSize = cafman.statistics.export.stepSize
+cafman.statistics.daily.stepSize = cafman.statistics.export.stepSize
+cafman.statistics.daily.displayStepSize = 5*60 //5mins, should be a divisor of oneDay.stepSize!
+

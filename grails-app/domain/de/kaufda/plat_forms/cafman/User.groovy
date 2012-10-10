@@ -1,5 +1,7 @@
 package de.kaufda.plat_forms.cafman
 
+import com.mongodb.BasicDBObject
+import com.mongodb.DBCursor
 import org.bson.types.ObjectId
 
 /**
@@ -54,5 +56,22 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
+
+    /**
+     * Custom isDirty implementation, as this is not supported with the mongoDB mapping.
+     *
+     * @param field The field, which has to be checked.
+     * @return true, if the field was changed.
+     */
+    private boolean isDirty(final String field) {
+        final BasicDBObject query = new BasicDBObject('_id', id)
+        final BasicDBObject fields = new BasicDBObject(['_id':0, (field): 1])
+        final DBCursor cursor = (DBCursor) User.collection.find(query, fields)
+        if (cursor.size() > 0) {
+            return this."$field" != cursor[0]."$field"
+        }
+
+        return true
+    }
 
 }
