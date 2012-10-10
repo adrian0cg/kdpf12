@@ -122,7 +122,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 security.admin.defaults.username = "CafMan.manager"
 security.admin.defaults.fullName = "CafMan Manager"
 security.admin.defaults.password = "admin"
-security.admin.defaults.email = "organizers@platf-form.org"
+security.admin.defaults.email = "organizers@plat-forms.org"
 
 // default values for calculation of caffeine uptake
 cafman.timeStep.length.millis = 60L //seconds
