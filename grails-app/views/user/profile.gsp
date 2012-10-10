@@ -9,9 +9,15 @@
 
 <body>
 
-<notifications:show/>
+<div class="page-header">
+    <h1><g:message code="profile.manage-account" /></h1>
+</div>
 
-<g:render template="manage-account" />
+<g:render template="account-details" />
+
+<hr/>
+
+<g:render template="choose-default-kitty" />
 
 </body>
 </html>
