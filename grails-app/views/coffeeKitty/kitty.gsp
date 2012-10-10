@@ -37,24 +37,9 @@
     <h1><g:message code="coffeeKitty.view.kitty.manage.title" /></h1>
 </div>
 
-<div class="row">
-    <div class="span6">
-        <p>
 
-        <h2><g:message code="coffeeKitty.view.kitty.overview.title" /></h2>
-        <table class="table table-condensed">
-            <thead>
-            <tr><th>Coffee Kitty</th><th>Account Balance</th><th></th></tr>
-            </thead>
-            <tbody>
-            <tr><td>The Addicts</td><td><span class="text-error pull-right">€ -17.85</span></td><td><a
-                    class="administer-link" href="kitty-admin.html">Administer</a></td></tr>
-            <tr><td>vel dolor.</td><td><span class="text-success pull-right">€ 2.54</span></td><td></td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<hr>
+<g:render template="overview" model="['coffeeKitties':coffeeKitties, loggedUser: loggedUser]" />
+
 
 <div class="row">
     <div class="span6">

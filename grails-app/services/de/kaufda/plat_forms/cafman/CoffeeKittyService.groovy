@@ -17,9 +17,15 @@ class CoffeeKittyService {
 
     public void join(CoffeeKitty coffeeKitty) {
         User loggedUser = springSecurityService.getCurrentUser()
-        Member member = new Member(user: loggedUser)
+        Member member = new Member(user: loggedUser, coffeeKittyOwnerId: loggedUser?.id, coffeeKittyId: coffeeKitty?.id)
         coffeeKitty.addToMembers member
         coffeeKitty.save()
+    }
+
+    public List<CoffeeKitty> findAllWhereLoggedUserIsAMember() {
+        User loggedUser = springSecurityService.getCurrentUser()
+        List<Member> members = Member.findAllByUser(loggedUser)
+        return CoffeeKitty.findAllByIdInList(members*.coffeeKittyId)
     }
 
 }
