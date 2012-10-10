@@ -116,7 +116,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/img/**':      [AuthenticationToken.ANONYMOUSLY],
         '/static/**':   [AuthenticationToken.ANONYMOUSLY],
         '/':            [AuthenticationToken.ANONYMOUSLY],
-        '/**':          [AuthenticationToken.FULLY]
+        '/**':          [AuthenticationToken.REMEMBERED]
 ]
 
 // admin user configuration
