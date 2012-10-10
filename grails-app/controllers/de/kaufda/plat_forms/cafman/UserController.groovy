@@ -18,12 +18,17 @@ class UserController {
     def home() {
         if (SpringSecurityUtils.ifAllGranted(Authority.ADMIN)) {
             return render(view: 'home-admin')
+        }
 
-        } else if (!coffeeKittyService.findAllWhereLoggedUserIsAMember()) {
+        final List<CoffeeKitty> coffeeKitties = coffeeKittyService.findAllWhereLoggedUserIsAMember()
+        if (!coffeeKitties) {
             return render(view: 'home-no-kitty')
         }
 
-        return render(view: 'home')
+        final User user = (User) springSecurityService.currentUser
+        final CoffeeKitty coffeeKitty = session.coffeeKitty ?: user.defaultCoffeeKitty
+
+        return render(view: 'home', model: [coffeeKitties: coffeeKitties, user: user, coffeeKitty: coffeeKitty])
     }
 
     def profile() {
@@ -64,7 +69,7 @@ class UserController {
         chain controller: 'user', action: 'profile', model: [cmd: cmd, denied: true]
     }
 
-    def changeCoffeeKitty(final Long id) {
+    def changeDefaultCoffeeKitty(final Long id) {
         final CoffeeKitty coffeeKitty = CoffeeKitty.get(id)
         if (coffeeKitty) {
             final User user = (User) springSecurityService.currentUser
@@ -73,6 +78,16 @@ class UserController {
         }
 
         redirect action: 'profile'
+    }
+
+    def changeCoffeeKitty(final Long id) {
+        final User user = (User) springSecurityService.currentUser
+        final CoffeeKitty coffeeKitty = CoffeeKitty.get(id)
+        if (coffeeKitty && coffeeKitty.findMemberByUser(user)) {
+            session.coffeeKitty = coffeeKitty
+        }
+
+        redirect action: 'home'
     }
 
 }

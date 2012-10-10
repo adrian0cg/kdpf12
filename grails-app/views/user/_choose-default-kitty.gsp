@@ -6,7 +6,7 @@
     <div class="span12">
         <h2><g:message code="coffee-kitty.choose-default" /></h2>
 
-        <g:form class="form-horizontal" url="[controller: 'user', action: 'changeCoffeeKitty']">
+        <g:form class="form-horizontal" url="[controller: 'user', action: 'changeDefaultCoffeeKitty']">
             <div class="control-group">
                 <label class="control-label" for="kitty-select"><g:message code="coffee-kitty.select" /></label>
 

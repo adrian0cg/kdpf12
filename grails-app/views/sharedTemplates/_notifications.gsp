@@ -39,8 +39,10 @@
                 $(this).parent().bind({
                     closed:function () {
                         var notifications = $(this).closest('.notifications');
-                        if (notifications.find('.alert').length == 1)
+                        if (notifications.find('.alert').length == 1) {
+                            console.log(notifications);
                             notifications.remove();
+                        }
                     }
                 });
                 $(this).parent().alert('close');
