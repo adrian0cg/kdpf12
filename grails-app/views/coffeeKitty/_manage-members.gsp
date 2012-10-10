@@ -1,7 +1,7 @@
 <%--
     @Plat_Forms RM
 --%>
-<h2>Members</h2>
+<h2><g:message code="coffeeKitty.view.admin.members.title"/></h2>
 
 <form class="form">
     <table class="table">
