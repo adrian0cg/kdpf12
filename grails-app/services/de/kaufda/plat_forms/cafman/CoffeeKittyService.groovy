@@ -28,7 +28,7 @@ class CoffeeKittyService {
 
     public List<CoffeeKitty> findAllWhereLoggedUserIsAMember() {
         final User user = (User) springSecurityService.currentUser
-        final List<Member> members = Member.findAllByUser(user)
+        final List<Member> members = Member.findAllByUserAndState(user, MemberState.ACCEPTED)
 
         return CoffeeKitty.findAllByIdInList(members*.coffeeKittyId)
     }

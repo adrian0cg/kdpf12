@@ -14,7 +14,13 @@ class NotificationController {
             return render(text: "")
         }
         member.state = MemberState.ACCEPTED
-        member.save()
+        if (member.save()) {
+            if (!member.user.defaultCoffeeKitty) {
+                member.user.defaultCoffeeKitty = CoffeeKitty.get(member.coffeeKittyId)
+                member.user.save()
+            }
+        }
+
         return render(text: "")
     }
 

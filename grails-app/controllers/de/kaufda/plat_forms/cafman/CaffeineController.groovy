@@ -1,12 +1,10 @@
 package de.kaufda.plat_forms.cafman
 
-import grails.plugins.springsecurity.Secured
-
-import static de.kaufda.plat_forms.cafman.security.AuthenticationToken.ANONYMOUSLY
-import org.springframework.http.HttpStatus
-import groovy.time.TimeCategory
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
+import groovy.time.TimeCategory
 import org.grails.plugins.csv.CSVWriter
+import org.springframework.http.HttpStatus
 
 /**
  * @Plat_Forms M
@@ -126,6 +124,22 @@ class CaffeineController {
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def highscore(User user) {
         render "Highscore $user"
+    }
+
+    def consume(final Long id) {
+        final CoffeeKitty coffeeKitty = CoffeeKitty.get(id)
+        final User user = (User) springSecurityService.currentUser
+        final Member member = coffeeKitty?.findMemberByUser(user)
+        if (!member) {
+            redirect controller: 'user', action: 'home'
+            return
+        }
+
+        member.balance -= coffeeKitty.price
+        member.save()
+        new CaffeineIntake(consumer: user).save()
+
+        redirect controller: 'user', action: 'home', params: [success: true]
     }
 
 }
