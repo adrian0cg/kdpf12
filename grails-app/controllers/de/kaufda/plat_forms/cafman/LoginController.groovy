@@ -14,11 +14,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletResponse
 
+import static de.kaufda.plat_forms.cafman.security.AuthenticationToken.ANONYMOUSLY
+
 /**
  * @author Patrick Jungermann
  * @Plat_Forms GM
  */
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+@Secured([ANONYMOUSLY])
 class LoginController {
 
     /**
@@ -58,6 +60,8 @@ class LoginController {
 
         final String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
         return [
+                signUpCmd: chainModel?.cmd,
+                user: chainModel?.user,
                 postUrl: postUrl,
                 rememberMeParameter: config.rememberMe.parameter
         ]

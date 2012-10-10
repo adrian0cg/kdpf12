@@ -28,14 +28,10 @@ class BootStrap {
                     username: adminDefaults.username,
                     fullName: adminDefaults.fullName,
                     password: adminDefaults.password,
-                    email: adminDefaults.email,
-                    enabled: true,
-                    accountExpired: false,
-                    accountLocked: false,
-                    passwordExpired: false
+                    email: adminDefaults.email
             )
             admin.addToAuthorities adminRole
-            admin.save(flush: true)
+            admin.save(flush: true, failOnError: true)
         }
     }
 
@@ -50,7 +46,7 @@ class BootStrap {
         Role role = Role.findByAuthority authority
         if (!role) {
             role = new Role(authority: authority)
-            role.save(flush: true)
+            role.save(flush: true, failOnError: true)
         }
 
         return role

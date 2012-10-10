@@ -3,7 +3,7 @@ package de.kaufda.plat_forms.cafman
 import org.bson.types.ObjectId
 
 /**
- * User domain class.
+ * Domain class for persisting users.
  *
  * @Plat_Forms GM
  * @author Krzysztof Kachel
@@ -11,18 +11,18 @@ import org.bson.types.ObjectId
  */
 class User {
 
-    transient springSecurityService
-
     static mapWith = "mongo"
+
+    transient springSecurityService
 
     ObjectId id
 
     String username
 	String password
-    boolean enabled
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+    boolean enabled = Boolean.TRUE
+	boolean accountExpired = Boolean.FALSE
+	boolean accountLocked = Boolean.FALSE
+	boolean passwordExpired = Boolean.FALSE
 
     String fullName
     String email
@@ -34,7 +34,7 @@ class User {
 		username blank: false, unique: true
 		password blank: false
         email email: true, unique: true
-        // Todo add needed validation
+        fullName blank: false, nullable: false
 	}
 
 	static mapping = {
