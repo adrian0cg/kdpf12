@@ -30,14 +30,11 @@
     <div class="span6">
         <h2>Caffeine levels (last 7 days)</h2>
 
-        <p>
-            Shows your caffeine levels in the last 7 days. You can download a CSV file with your levels on a 30-minute interval below.
+        <p>Shows your caffeine levels in the last 7 days. You can download a CSV file with your levels on a 30-minute interval below.</p>
 
-        <p>
-            <i class="icon-download"></i> <a href="weekly.csv" id="csv-week">Download CSV</a>
+        <p><i class="icon-download"></i> <a href="weekly.csv" id="csv-week">Download CSV</a></p>
 
-        <p>
-            <img src="img/weekly.png"/>
+        <p><img src="img/weekly.png"/></p>
     </div>
 </div>
 
