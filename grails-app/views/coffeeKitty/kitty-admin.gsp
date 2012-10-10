@@ -10,7 +10,7 @@
 <body>
 
 <div class="page-header">
-    <h1>Manage "The Addicts"</h1>
+    <h1><g:message code="coffeeKitty.view.admin.title"/></h1>
 </div>
 
 <div class="row">
