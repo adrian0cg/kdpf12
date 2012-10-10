@@ -31,4 +31,10 @@ class CaffeineIntake {
         dose min: 0.0D
         peakLevel nullable: true
     }
+
+    static mapping = {
+        taken index:true
+        compoundIndex consumer:1, taken:1
+    }
+
 }
