@@ -5,7 +5,7 @@ import grails.plugins.springsecurity.Secured
 import static de.kaufda.plat_forms.cafman.security.AuthenticationToken.ANONYMOUSLY
 import org.springframework.http.HttpStatus
 import groovy.time.TimeCategory
-import grails.converters.deep.JSON
+import grails.converters.JSON
 import org.grails.plugins.csv.CSVWriter
 
 /**
@@ -53,9 +53,7 @@ class CaffeineController {
         session.statistics = [ daily: [ts:now.time, values:dailyStatistics], weekly: [ ts:now.time, values: weeklyStatistics]]
 
         // render into model
-
-        // output
-        render "Stats for ${user.username} (${user.id}):<br/>$now.time<p>$dailyStatistics </p><p> $weeklyStatistics</p"
+       [timestamp: now.time, user: user, spectator: springSecurityService.currentUser]
     }
 
     def single() {
@@ -64,15 +62,18 @@ class CaffeineController {
 
         String interval = params.interval // guaranteed to be either 'daily' of 'weekly'
         def stats = [:]
+        Integer stepSize
+        Integer displayStepSize
         use (TimeCategory) {
             Long cachedTs = session.statistics?."$interval".ts
-            if (cachedTs && (cachedTs - forTs < 1000L)) {
+            // cache two seconds
+            if (cachedTs && (cachedTs - forTs < 2000L)) {
                 // cache hit
                 stats = session.statistics."$interval".values
             } else {
                 // cache miss
-                Integer stepSize = grailsApplication.config.cafman.statistics."$interval".stepSize
-                Integer displayStepSize = grailsApplication.config.cafman.statistics."$interval".displayStepSize
+                stepSize = grailsApplication.config.cafman.statistics."$interval".stepSize
+                displayStepSize = grailsApplication.config.cafman.statistics."$interval".displayStepSize
                 // calc
                 stats = caffeineLevelService.getStatisticsForInterval(user, forDate - 1.day, forDate, displayStepSize)
 
@@ -86,7 +87,7 @@ class CaffeineController {
         def flatStats = stats.collect{timestamp, value -> [timestamp, value]}
         withFormat {
             json {
-                render ([['timestamp','level']]+ flatStats) as JSON
+                render ([['timestamp','level']] + flatStats) as JSON
             }
             csv {
                 //stats.put("timestamp", "level")) as JSON
@@ -99,6 +100,19 @@ class CaffeineController {
                         timestamp {it[0]}
                         level {it[1]}
                     })
+
+                    // extract export stats from display stats
+                    /*if (interval == "daily"){
+                        Integer skipSize = stepSize/displayStepSize
+                        def sparseStats = []
+                        Integer next = 0
+                        flatStats.eachWithIndex { elem, i ->
+                            if (i == next) {
+                                sparseStats << elem
+                                next += skipSize
+                            }
+                        }
+                    } else*/
                     csvWriter.writeAll(flatStats)
                 }
             }
