@@ -130,6 +130,7 @@ cafman.unitDose.amount.mg = 150D
 
 cafman.statistics.export.stepSize = 30*60  //30mins
 cafman.statistics.weekly.stepSize = cafman.statistics.export.stepSize
+cafman.statistics.weekly.displayStepSize = cafman.statistics.export.stepSize
 cafman.statistics.daily.stepSize = cafman.statistics.export.stepSize
 cafman.statistics.daily.displayStepSize = 5*60 //5mins, should be a divisor of oneDay.stepSize!
 
