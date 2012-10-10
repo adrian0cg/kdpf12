@@ -3,7 +3,7 @@
 --%>
 <div class="row">
     <div class="span12">
-        <h2><g:message code="coffeeKitty.view.kitty.search.title"/></h2>
+            <h2><g:message code="coffeeKitty.view.kitty.search.title"/></h2>
 
         <p><g:message code="coffeeKitty.view.kitty.search.description"/></p>
 

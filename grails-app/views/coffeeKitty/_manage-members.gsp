@@ -3,7 +3,7 @@
 --%>
 <h2><g:message code="coffeeKitty.view.admin.members.title"/></h2>
 
-<form class="form">
+<g:form class="form" controller="coffeeKitty" action="savePayments">
     <table class="table">
         <thead>
         <tr>
@@ -22,7 +22,9 @@
                 </td>
                 <td>
                     <div class="input-prepend"><span class="add-on">
-                        <g:message code="default.view.euro" /></span><input type="text" class="input-small input-payment">
+                        <g:message code="default.view.euro" /></span>
+                        <input type="text" class="input-small input-payment" name="payment">
+                        <g:hiddenField name="memberId" value="${member.id}" />
                     </div>
                 </td>
             </tr>
@@ -31,4 +33,4 @@
         </tbody>
     </table>
     <button id="payments-submit" type="submit" class="btn btn-primary"><g:message code="coffeeKitty.view.admin.savePayments"/></button>
-</form>
+</g:form>

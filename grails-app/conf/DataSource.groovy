@@ -3,9 +3,9 @@ environments {
     development {
         grails {
             mongo {
-                host = "160.45.116.138"
+                host = "localhost"
                 port = 27017
-                databaseName = "cafman_dev_pj"
+                databaseName = "cafman_dev"
             }
         }
     }
@@ -13,7 +13,7 @@ environments {
     test {
         grails {
             mongo {
-                host = "160.45.116.138"
+                host = "localhost"
                 port = 27017
                 databaseName = "cafman_test"
             }
@@ -23,7 +23,7 @@ environments {
     production {
         grails {
             mongo {
-                host = "160.45.116.138"
+                host = "localhost"
                 port = 27017
                 databaseName = "cafman_prod"
             }

@@ -71,4 +71,24 @@ class CoffeeKittyController {
         redirect action: 'kitty'
     }
 
+    def savePayments() {
+        List memberIds = params.list("memberId")
+        List payments = params.list("payment")
+        Long coffeeKittyId = null
+
+        for(int i = 0; i < memberIds.size(); i++) {
+            if(payments[i]) {
+                Double payment = payments[i]?.toDouble()
+                Member member = Member.get(memberIds[i]?.toLong())
+                member.balance += payment
+                member.save()
+                if(!coffeeKittyId) {
+                    coffeeKittyId = member.coffeeKittyId
+                }
+            }
+        }
+
+        redirect(action: 'kittyAdmin', id: coffeeKittyId)
+    }
+
 }
