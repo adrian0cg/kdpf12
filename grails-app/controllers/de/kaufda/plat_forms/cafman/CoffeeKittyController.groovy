@@ -11,7 +11,6 @@ class CoffeeKittyController {
     static defaultAction = "kitty"
 
     def springSecurityService
-
     def coffeeKittyService
 
     def kitty() {
@@ -26,12 +25,21 @@ class CoffeeKittyController {
     }
 
     def save() {
-        CoffeeKitty coffeeKitty = new CoffeeKitty(params)
-        coffeeKitty.user = springSecurityService.getCurrentUser()
-        if (coffeeKitty.validate() && coffeeKitty.save()) {
+        final User user = (User) springSecurityService.currentUser
+        final CoffeeKitty coffeeKitty = new CoffeeKitty(params)
+        coffeeKitty.user = user
+
+        if (coffeeKitty.save()) {
             coffeeKittyService.join(coffeeKitty, true)
+
+            if (!user.defaultCoffeeKitty) {
+                user.defaultCoffeeKitty = coffeeKitty
+                user.save()
+            }
+
             return redirect(action: 'kittyAdmin', id: coffeeKitty.id)
         }
+
         return redirect(action: 'kitty')
     }
 
