@@ -13,7 +13,7 @@ class UrlMappings {
 			}
 		}
 
-        "/statistics/$user/$timestamp/$interval" {
+        "/caffeine/statistics/$user/$timestamp/$interval" {
             controller = "caffeine"
             action = "single"
             constraints {
