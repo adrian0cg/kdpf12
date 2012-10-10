@@ -9,52 +9,13 @@
 
 <body>
 
-<div class="page-header notifications">
-    <h1><g:message code="coffeeKitty.view.kitty.notifications.title" /></h1>
-
-    <div class="alert alert-info">
-        John Smith (CoffeePapa) has requested to become a member of "The Addicts".
-        <div class="pull-right alert-controls">
-            <button type="submit" class="btn btn-success btn-mini accept-member"
-                    data-dismiss="alert">Accept</button>
-            <button type="submit" class="btn btn-danger btn-mini decline-member"
-                    data-dismiss="alert">Decline</button>
-        </div>
-    </div>
-
-    <div class="alert alert-info">
-        Old Bushmills (Irish Coffee) has requested to become a member of "The Addicts".
-        <div class="pull-right alert-controls">
-            <button type="submit" class="btn btn-success btn-mini accept-member"
-                    data-dismiss="alert">Accept</button>
-            <button type="submit" class="btn btn-danger btn-mini decline-member"
-                    data-dismiss="alert">Decline</button>
-        </div>
-    </div>
-</div>
-
 <div class="page-header">
     <h1><g:message code="coffeeKitty.view.kitty.manage.title" /></h1>
 </div>
 
-<div class="row">
-    <div class="span6">
-        <p>
 
-        <h2><g:message code="coffeeKitty.view.kitty.overview.title" /></h2>
-        <table class="table table-condensed">
-            <thead>
-            <tr><th>Coffee Kitty</th><th>Account Balance</th><th></th></tr>
-            </thead>
-            <tbody>
-            <tr><td>The Addicts</td><td><span class="text-error pull-right">€ -17.85</span></td><td><a
-                    class="administer-link" href="kitty-admin.html">Administer</a></td></tr>
-            <tr><td>vel dolor.</td><td><span class="text-success pull-right">€ 2.54</span></td><td></td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<hr>
+<g:render template="overview" model="['coffeeKitties': coffeeKitties, 'loggedUser': loggedUser]" />
+
 
 <div class="row">
     <div class="span6">
@@ -72,21 +33,6 @@
 <hr>
 
 <g:render template="search" bean="${coffeeKitties}" />
-
-<r:script>
-    $('.alert-controls').bind({
-        close:function () {
-            $(this).parent().bind({
-                closed:function () {
-                    notifications = $(this).closest('.notifications');
-                    if (notifications.find('.alert').length == 1)
-                        notifications.remove();
-                }
-            });
-            $(this).parent().alert('close');
-        }
-    });
-</r:script>
 
 </body>
 </html>

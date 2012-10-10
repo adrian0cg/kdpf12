@@ -1,3 +1,6 @@
+<%--
+    @Plat_Forms RM
+--%>
 <div class="row">
     <div class="span12">
         <h2><g:message code="coffeeKitty.view.kitty.search.title"/></h2>
@@ -15,4 +18,4 @@
     </div>
 </div>
 
-<g:render template="searchResults" bean="${coffeeKitties}"/>
+<g:render template="searchResults"/>

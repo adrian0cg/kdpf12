@@ -17,8 +17,7 @@ class SignUpController {
     def springSecurityService
 
     def index(final SignUpCommand cmd) {
-        cmd.validate()
-        final boolean invalidPassword = cmd.errors.getFieldError('password').asBoolean()
+        final boolean invalidPassword = cmd.errors.hasFieldErrors 'password'
         final User user = new User(
                 username: cmd.username,
                 email: cmd.email,
@@ -29,12 +28,12 @@ class SignUpController {
         )
 
         if (user.save(flush: true)) {
-            springSecurityService.reauthenticate(cmd.username, cmd.password)
+            springSecurityService.reauthenticate cmd.username, cmd.password
             redirect controller: 'login', action: 'index'
             return
         }
 
-        chain(controller: 'login', action: 'auth', model: [cmd: cmd, user: user])
+        chain controller: 'login', action: 'auth', model: [cmd: cmd, user: user]
     }
 
 }

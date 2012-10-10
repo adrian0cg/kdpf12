@@ -1,7 +1,10 @@
+<%--
+    @Plat_Forms RM
+--%>
 <div class="row">
     <div class="span12" id="searchResults">
 
-        <g:if test="${coffeeKitties?.size() > 0}">
+        <g:if test="${searchResult?.size() > 0}">
 
             <h3><g:message code="coffeeKitty.view.kitty.search.title" /></h3>
 
@@ -15,7 +18,7 @@
                 </thead>
                 <tbody>
 
-                <g:each in="${coffeeKitties}" var="coffeeKitty">
+                <g:each in="${searchResult}" var="coffeeKitty">
                     <member:showMembership coffeeKitty="${coffeeKitty}"/>
                 </g:each>
                 </tbody>

@@ -30,7 +30,7 @@
 
 <div class="container">
     <sec:ifLoggedIn>
-        <notifications:show/>
+        <notify:membership/>
     </sec:ifLoggedIn>
 
     <g:layoutBody/>
