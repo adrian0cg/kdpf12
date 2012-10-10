@@ -13,42 +13,30 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="dropdown active">
-                        <g:link elementId="home-link" url="[controller: 'user', action: 'home']" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="${(controllerName == 'user' && actionName == 'home') || (controllerName == 'login' && actionName == 'auth') ? 'active' : ''}">
+                        <g:link elementId="home-link" url="[controller: 'user', action: 'home']">
                             <g:message code="nav.home"/>
-                            <b class="caret"></b>
                         </g:link>
-                        <ul class="dropdown-menu">
-                            <%--
-                                different variant:
-                                <li><a href="index.html">Home - anonymous user</a></li>
-                            --%>
-                            <li class="active"><a id="home-link" href="index.html">Home - anonymous user</a></li>
-                            <li><a href="index-authd-no-kitty.html">Home - logged in but not member of any kitty</a>
-                            </li>
-                            <li><a href="index-authd.html">Home - logged in and member of at least one kitty</a></li>
-                            <li><a href="index-admin.html">Home - logged in as the admin user</a></li>
-                        </ul>
                     </li>
                     <sec:ifLoggedIn>
-                        <li>
+                        <li class="${controllerName == 'caffeine' && actionName == 'statistics' ? 'active' : ''}">
                             <g:link elementId="caffeine-link"  url="[controller: 'caffeine', action: 'statistics']">
                                 <g:message code="nav.caffeine-statistics" />
                             </g:link>
                         </li>
-                        <li>
+                        <li class="${controllerName == 'caffeine' && actionName == 'highscore' ? 'active' : ''}">
                             <g:link elementId="highscores-link" url="[controller: 'caffeine', action: 'highscore']">
                                 <g:message code="nav.highscores"/>
                             </g:link>
                         </li>
-                        <li>
+                        <li class="${controllerName == 'coffeeKitty' && (actionName in ['kitty', 'kittyAdmin']) ? 'active' : ''}">
                             <g:link elementId="kitty-link" url="[controller: 'coffeeKitty', action: 'kitty']">
                                 <g:message code="nav.coffee-kitty" />
                             </g:link>
                         </li>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
-                        <li>
+                        <li class="${controllerName == 'caffeine' && actionName == 'highscore' ? 'active' : ''}">
                             <g:link elementId="highscores-link" url="[controller: 'caffeine', action: 'publicHighscore']">
                                 <g:message code="nav.highscores"/>
                             </g:link>
