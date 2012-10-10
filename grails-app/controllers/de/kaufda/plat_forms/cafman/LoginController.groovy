@@ -89,7 +89,7 @@ class LoginController {
     /**
      * Login page for users with a remember-me cookie but accessing a IS_AUTHENTICATED_FULLY page.
      */
-    def full = {
+    def full() {
         def config = SpringSecurityUtils.securityConfig
         render view: 'auth', params: params,
                 model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
@@ -99,7 +99,7 @@ class LoginController {
     /**
      * Callback after a failed login. Redirects to the auth page with a warning message.
      */
-    def authfail = {
+    def authfail() {
 
         def username = session[UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY]
         String msg = ''
@@ -134,14 +134,14 @@ class LoginController {
     /**
      * The Ajax success redirect url.
      */
-    def ajaxSuccess = {
+    def ajaxSuccess() {
         render([success: true, username: springSecurityService.authentication.name] as JSON)
     }
 
     /**
      * The Ajax denied redirect url.
      */
-    def ajaxDenied = {
+    def ajaxDenied() {
         render([error: 'access denied'] as JSON)
     }
 }
