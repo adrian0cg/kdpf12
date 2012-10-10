@@ -8,7 +8,7 @@ class NotificationTagLib {
 
     def membership = { Map attributes ->
         List<Member> notifications = notificationService.findMembershipNotifications()
-        g.render(template: '/sharedTemplates/notifications', model: [notifications: notifications])
+        out << g.render(template: '/sharedTemplates/notifications', model: [notifications: notifications])
     }
 
 }
